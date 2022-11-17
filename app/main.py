@@ -1,13 +1,32 @@
 import os
 import openai
+import argparse
 
-# Load your API key from an environment variable or secret management service
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# Load API key from an environment variable or secret management service
+def load_api_key():
+    openai.api_key = os.getenv("OPENAI_API_KEY")
 
-subject = "tea"
+def generate_snippet(user_input):
+    load_api_key()
 
-prompt = f"Generate branding snippet for {subject}"
+    subject = user_input
 
-response = openai.Completion.create(model="text-davinci-002", prompt=prompt, temperature=0, max_tokens=100)
+    prompt = f"Generate branding snippet for {subject}"
 
-print(response)
+    response = openai.Completion.create(model="text-davinci-002", prompt=prompt, temperature=0, max_tokens=100)
+
+    print(response)
+
+def get_input():
+    parse = argparse.ArgumentParser()
+    parse.add_argument("--input", "-i", type=str, required=True)
+    args = parse.parse_args()
+    user_input = args.input
+    return user_input
+
+def main():
+    user_input = get_input()
+    generate_snippet(user_input)
+
+if __name__ == "__main__":
+    main()
