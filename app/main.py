@@ -5,12 +5,18 @@ import argparse
 MAX_LENGTH = 25
 
 # Load API key from an environment variable or secret management service
-def load_api_key():
-    openai.api_key = os.getenv("OPENAI_API_KEY")
+def load_and_check_api_key():
+    if os.getenv("OPENAI_API_KEY") not in [None, ""]:
+        openai.api_key = os.getenv("OPENAI_API_KEY")
+        return True
+    return False
 
 def validate_input(user_input):
     if len(user_input) > MAX_LENGTH:
         print(f"Max Length Allowed: {MAX_LENGTH}")
+        exit()
+    if (user_input == ""):
+        print("Please enter a value")
         exit()
 
 def show_snippet(response):
@@ -23,9 +29,13 @@ def show_snippet(response):
 
 def generate_snippet(user_input):
     validate_input(user_input)
+    is_key = load_and_check_api_key()
+    if is_key == False:
+        print("API Key not found")
+        exit()
+
     print(f"Value: {user_input}")
     print("Generating snippet...")
-    load_api_key()
 
     subject = user_input
 
