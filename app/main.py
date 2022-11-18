@@ -15,10 +15,10 @@ def validate_input(user_input):
 
 def show_snippet(response):
     if (response["choices"][0]["finish_reason"] != "stop"):
-        snippet = response["choices"][0]["text"][2:] + "..."
+        snippet = response["choices"][0]["text"] + "..."
         print(f"\nSnippet: {snippet}")
     else:
-        snippet = response["choices"][0]["text"][2:]
+        snippet = response["choices"][0]["text"]
         print(f"\nSnippet: {snippet}")
 
 def generate_snippet(user_input):
