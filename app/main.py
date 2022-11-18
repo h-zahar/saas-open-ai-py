@@ -9,7 +9,7 @@ def load_api_key():
     openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def validate_input(user_input):
-    if len(user_input) > 5:
+    if len(user_input) > MAX_LENGTH:
         print(f"Max Length Allowed: {MAX_LENGTH}")
         exit()
 
