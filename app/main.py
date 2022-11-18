@@ -13,26 +13,29 @@ def load_and_check_api_key():
 
 def validate_input(user_input):
     if len(user_input) > MAX_LENGTH:
-        print(f"Max Length Allowed: {MAX_LENGTH}")
-        exit()
+        return { 'status': False, 'msg': "Max Length Allowed: {MAX_LENGTH}" }
     if (user_input == ""):
-        print("Please enter a value")
-        exit()
+        return { 'status': False, 'msg': "Input cannot be empty" }
+    return { 'status': True, 'msg': "Input is valid" }
 
 def show_snippet(response):
     if (response["choices"][0]["finish_reason"] != "stop"):
         snippet = response["choices"][0]["text"] + "..."
         print(f"\nSnippet: {snippet}")
+        return { 'status': True, 'msg': snippet }
     else:
         snippet = response["choices"][0]["text"]
         print(f"\nSnippet: {snippet}")
+        return { 'status': True, 'msg': snippet }
 
-def generate_snippet(user_input):
-    validate_input(user_input)
+def generate_snippet(user_input: str) -> dict['status': True | False, 'msg': str]:
+    isValid = validate_input(user_input)
+    if (isValid['status'] == False):
+        return { 'status': False, 'msg': isValid['msg'] }
+
     is_key = load_and_check_api_key()
     if is_key == False:
-        print("API Key not found")
-        exit()
+        return { 'status': False, 'msg': "API Key not found" }
 
     print(f"Value: {user_input}")
     print("Generating snippet...")
@@ -43,7 +46,7 @@ def generate_snippet(user_input):
 
     response = openai.Completion.create(model="text-davinci-002", prompt=prompt, temperature=0, max_tokens=100)
 
-    show_snippet(response)
+    return show_snippet(response)
 
 def get_input():
     parse = argparse.ArgumentParser()
