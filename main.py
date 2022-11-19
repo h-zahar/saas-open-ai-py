@@ -5,7 +5,7 @@ app = FastAPI()
 
 @app.get("/")
 async def read_root():
-    return {"Hello": "World"}
+    return {"Hello, Hit": "https://api-saas.onrender.com/snippet/?user_input=[your_keyword]"}
 
 @app.get("/snippet")
 async def get_generate_snippet(user_input: str):

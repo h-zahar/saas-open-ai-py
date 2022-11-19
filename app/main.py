@@ -13,7 +13,7 @@ def load_and_check_api_key():
 
 def validate_input(user_input):
     if len(user_input) > MAX_LENGTH:
-        return { 'status': False, 'msg': "Max Length Allowed: {MAX_LENGTH}" }
+        return { 'status': False, 'msg': f"Max Length Allowed: {MAX_LENGTH}" }
     if (user_input == ""):
         return { 'status': False, 'msg': "Input cannot be empty" }
     return { 'status': True, 'msg': "Input is valid" }
