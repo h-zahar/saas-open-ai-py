@@ -9,7 +9,7 @@ async def read_root():
 
 @app.get("/snippet")
 async def get_generate_snippet(user_input: str):
-    content: dict['status': True | False, 'msg': str] = generate_snippet(user_input)
+    content = generate_snippet(user_input)
     if content['status'] == False:
         raise HTTPException(status_code=404, detail=content['msg'])
     return { 'status_code': 200, 'content': content['msg'] }

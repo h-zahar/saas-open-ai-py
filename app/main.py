@@ -28,7 +28,7 @@ def show_snippet(response):
         print(f"\nSnippet: {snippet}")
         return { 'status': True, 'msg': snippet }
 
-def generate_snippet(user_input: str) -> dict['status': True | False, 'msg': str]:
+def generate_snippet(user_input: str):
     isValid = validate_input(user_input)
     if (isValid['status'] == False):
         return { 'status': False, 'msg': isValid['msg'] }
