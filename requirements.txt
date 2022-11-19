@@ -19,8 +19,8 @@ MarkupSafe==2.1.1
 openai==0.25.0
 openpyxl==3.0.10
 orjson==3.8.1
-pandas==1.5.1
-pandas-stubs==1.5.1.221024
+# pandas==1.5.1
+# pandas-stubs==1.5.1.221024
 pydantic==1.10.2
 python-dateutil==2.8.2
 python-dotenv==0.21.0
