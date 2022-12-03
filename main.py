@@ -7,6 +7,7 @@ app = FastAPI()
 origins = [
     "http://localhost",
     "http://localhost:3000",
+    "https://tagliner.vercel.app"
 ]
 
 app.add_middleware(
